@@ -1,0 +1,28 @@
+commit cc678a25e2e7f18e4c3a366f6fa0b1711d79a592
+Author: Merlin Chlosta <merlin.chlosta+github@rub.de>
+Date:   Thu Feb 25 15:08:06 2021 +0100
+
+    Fix jumping to page by URL
+
+:100644 100644 a678759 f63b743 M	share/pdf2htmlEX.js.in
+
+diff --git a/share/pdf2htmlEX.js.in b/share/pdf2htmlEX.js.in
+index a678759..f63b743 100644
+--- a/share/pdf2htmlEX.js.in
++++ b/share/pdf2htmlEX.js.in
+@@ -311,13 +311,13 @@ Viewer.prototype = {
+ 
+     if (this.config['hashchange_handler']) {
+       window.addEventListener('hashchange', function(e) {
+-        self.navigate_to_dest(document.location.hash.substring(1));
++        self.navigate_to_dest(document.location.hash.substring(1), document.location);
+       }, false);
+     }
+ 
+     if (this.config['view_history_handler']) {
+       window.addEventListener('popstate', function(e) {
+-        if(e.state) self.navigate_to_dest(e.state);
++        if(e.state) self.navigate_to_dest(e.state, document.location);
+       }, false);
+     }
+ 
