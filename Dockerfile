@@ -32,9 +32,11 @@ RUN cd /tmp && \
     cp splash/*.h  /usr/local/include/poppler/splash && \
     cd && rm -rf /tmp/poppler
 
+ADD pdf2html-urlnav.patch /pdf2html-urlnav.patch
 RUN cd /tmp && \
     git clone --depth=1 https://github.com/pdf2htmlEX/pdf2htmlEX.git -b v0.18.7-poppler-0.81.0 && \
     cd pdf2htmlEX && \
+    git apply /pdf2html-urlnav.patch && \
     export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig && \
     mkdir build && \
     cd build && \
